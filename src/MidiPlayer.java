@@ -10,7 +10,6 @@
  * remember to name the file using the "src/fileName.mid"
  */
 
-
 import javax.sound.midi.*;
 import java.io.*;
 
@@ -23,20 +22,20 @@ public class MidiPlayer implements Runnable {
 	public static void play(String midiString) {
 
 		midiString = midiString;
-		midiFile = new File(midiString);	
+		midiFile = new File(midiString);
 		(new Thread(new MidiPlayer())).start();
 	}
 
 	public void run() {
 		System.out.println("Your .mid file started playing!");
 
-		if(!midiFile.exists()) {
+		if (!midiFile.exists()) {
 			System.out.println("Cannot find .mid file.  Check your path.");
 			helpAndExit();
-		} else if(midiFile.isDirectory()) {
+		} else if (midiFile.isDirectory()) {
 			System.out.println("Can't find .mid file in the chosen directory.");
 			helpAndExit();
-		} else if (!midiFile.canRead() ) {
+		} else if (!midiFile.canRead()) {
 			System.out.println("Can't read .mid file.  Are you sure you have the right file type?");
 			helpAndExit();
 		}
@@ -47,11 +46,11 @@ public class MidiPlayer implements Runnable {
 			sequencer.setSequence(MidiSystem.getSequence(midiFile));
 			sequencer.open();
 			sequencer.start();
-			while(true) {
-				if(sequencer.isRunning()) {
+			while (true) {
+				if (sequencer.isRunning()) {
 					try {
 						Thread.sleep(1000); // Check every second
-					} catch(InterruptedException ignore) {
+					} catch (InterruptedException ignore) {
 						break;
 					}
 				} else {
@@ -61,20 +60,19 @@ public class MidiPlayer implements Runnable {
 			// Close the MidiDevice & free resources
 			sequencer.stop();
 			sequencer.close();
-		} catch(MidiUnavailableException mue) {
+		} catch (MidiUnavailableException mue) {
 			System.out.println("Midi device unavailable!");
-		} catch(InvalidMidiDataException imde) {
+		} catch (InvalidMidiDataException imde) {
 			System.out.println("Invalid Midi data!");
-		} catch(IOException ioe) {
+		} catch (IOException ioe) {
 			System.out.println("I/O Error!");
-		} 
+		}
 
-	}  
-
+	}
 
 	/** Provides help message and exits the program */
 	private static void helpAndExit() {
 		System.out.println("Usage: java MidiPlayer midifile.mid");
 		System.exit(1);
 	}
-}  
+}

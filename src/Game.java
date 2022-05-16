@@ -10,16 +10,17 @@ public class Game {
   private int msElapsed;
   private int timesGet;
   private int timesAvoid;
-  private String userPic = "images/user.gif";
+  private String userPic = "images/map.jpg";
   
   public Game() {
 
-    grid = new Grid(35, 35);
-    userRow = 3;
+    grid = new Grid(15, 15);
+    userRow = 1;
     msElapsed = 0;
     timesGet = 0;
     timesAvoid = 0;
     updateTitle();
+    grid.setBackground("image/map.jpg");
     grid.setImage(new Location(userRow, 0), userPic);
   }
   
@@ -29,6 +30,7 @@ public class Game {
       grid.pause(100);
       handleKeyPress();
       if (msElapsed % 300 == 0) {
+        // this will make move 
         scrollLeft();
         spawn();
       }
@@ -84,13 +86,16 @@ public class Game {
   }
   
   public void updateTitle() {
-    grid.setTitle("Game:  " + getScore());
+    grid.setTitle("Your Score :  " + getScore());
    
   }
   
   public boolean isGameOver() {
     return false;
   }
-    
 
+  public boolean accuracy(){
+  return 
+// average from target divided by the shots made. 
+}
 }
