@@ -11,7 +11,7 @@ public class Game {
   private int timesGet;
   private int timesAvoid;
   private String userPic = "images/map.jpg";
-  
+
   public Game() {
 
     grid = new Grid(15, 15);
@@ -23,14 +23,14 @@ public class Game {
     grid.setBackground("image/map.jpg");
     grid.setImage(new Location(userRow, 0), userPic);
   }
-  
+
   public void play() {
 
     while (!isGameOver()) {
       grid.pause(100);
       handleKeyPress();
       if (msElapsed % 300 == 0) {
-        // this will make move 
+        // this will make move
         scrollLeft();
         spawn();
       }
@@ -38,64 +38,62 @@ public class Game {
       msElapsed += 100;
     }
   }
-  
-  public void handleKeyPress(){
 
-    //check last key pressed
+  public void handleKeyPress() {
+
+    // check last key pressed
     int key = grid.checkLastKeyPressed();
     System.out.println(key);
 
-    //set "w" key to move the plane up
-    if(key == 87){
-        //check case where out of bounds
+    // set "w" key to move the plane up
+    if (key == 87) {
+      // check case where out of bounds
 
-        //change the field for userrow
+      // change the field for userrow
 
-        userRow--;
+      userRow--;
 
-        //shift the user picture up in the array
-        Location loc = new Location(userRow, 0);
-        grid.setImage(loc, "user.gif");
-        
-        Location oldLoc = new Location(userRow+1, 0);
-        grid.setImage(oldLoc, null);
+      // shift the user picture up in the array
+      Location loc = new Location(userRow, 0);
+      grid.setImage(loc, "user.gif");
 
-  }
-    //if I push down arrow, then plane goes down
+      Location oldLoc = new Location(userRow + 1, 0);
+      grid.setImage(oldLoc, null);
 
-
-  }
-
-
-  //populate target
-  public void spawn(){
-     // spawns random target on the grid 
-  }
-  
-  public void scrollLeft(){
+    }
+    // if I push down arrow, then plane goes down
 
   }
-  
+
+  // populate target
+  public void spawn() {
+    // spawns random target on the grid
+  }
+
+  public void scrollLeft() {
+
+  }
+
   public void handleCollision(Location loc) {
 
   }
-  
+
   public int getScore() {
-     //score updates if you hit the target 
+    // score updates if you hit the target
     return 0;
   }
-  
+
   public void updateTitle() {
     grid.setTitle("Your Score :  " + getScore());
-   
+
   }
-  
+
   public boolean isGameOver() {
     return false;
   }
 
-  public boolean accuracy(){
-  return 
-// average from target divided by the shots made. 
-}
+  public boolean accuracy() {
+
+    // average from target divided by the shots made.
+  }
 }
