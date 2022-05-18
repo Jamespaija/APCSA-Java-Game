@@ -1,6 +1,6 @@
 /* Game Class Starter File
  * Last Edit: 5/6/2021
- * Author: _____________________
+ * Author: James Paija Pun
  */
 
 public class Game {
@@ -10,7 +10,7 @@ public class Game {
   private int msElapsed;
   private int timesGet;
   private int timesAvoid;
-  private String userPic = "images/map.jpg";
+  private String userPic = "images/target.png";
 
   public Game() {
 
@@ -20,14 +20,14 @@ public class Game {
     timesGet = 0;
     timesAvoid = 0;
     updateTitle();
-    grid.setBackground("image/map.jpg");
+    grid.setBackground("images/map.jpg");
     grid.setImage(new Location(userRow, 0), userPic);
   }
 
   public void play() {
 
     while (!isGameOver()) {
-      grid.pause(100);
+      Grid.pause(100);
       handleKeyPress();
       if (msElapsed % 300 == 0) {
         // this will make move
@@ -68,6 +68,12 @@ public class Game {
   // populate target
   public void spawn() {
     // spawns random target on the grid
+    for(int i = 0; i < grid.getNumRows(); i++){
+      for(int c = 0; c< grid.getNumCols(); i++){
+
+
+  }
+}
   }
 
   public void scrollLeft() {
@@ -92,8 +98,8 @@ public class Game {
     return false;
   }
 
-  public boolean accuracy() {
+  //public boolean accuracy() {
 
     // average from target divided by the shots made.
-  }
+  
 }

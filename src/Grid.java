@@ -498,4 +498,4 @@ public class Grid extends JComponent implements KeyListener, MouseListener
 		// ignored
 	}
 
-}  
+}
