@@ -2,7 +2,7 @@
  * Last Edit: 5/6/2021
  * Author: James Paija Pun
  */
-
+import java.util.Random;
 public class Game {
 
   private Grid grid;
@@ -11,6 +11,10 @@ public class Game {
   private int timesGet;
   private int timesAvoid;
   private String userPic = "images/target.png";
+  /*private final String fileCursorLocked = "images/cursors/locked.png",
+			fileCursorUnlocked = "images/cursors/unlocked.png",
+			fileCursorDefault = "images/cursors/default.png";*/
+  public int [][]lastLoc =  int [][];
 
   public Game() {
 
@@ -38,6 +42,15 @@ public class Game {
       msElapsed += 100;
     }
   }
+public void handleMousePressed() {
+
+    // check last key pressed
+    Location loc = grid.checkLastLocationClicked();
+    System.out.println(loc);
+
+    //if (loc) {
+    }
+
 
   public void handleKeyPress() {
 
@@ -71,6 +84,9 @@ public class Game {
     for(int i = 0; i < grid.getNumRows(); i++){
       for(int c = 0; c< grid.getNumCols(); i++){
 
+
+
+      //field for target and use the field location to compare it to handleMousePressed. 
 
   }
 }
