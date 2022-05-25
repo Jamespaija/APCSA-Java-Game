@@ -29,13 +29,18 @@ public class Game {
     while (!isGameOver()) {
       Grid.pause(100);
       handleKeyPress();
+      System.out.println("finished hkp");
       if (msElapsed % 300 == 0) {
         // this will make move
         scrollLeft();
+        System.out.println("about to spawn");
         spawn();
       }
+      System.out.println("finished if");
       updateTitle();
+      System.out.println("updated title");
       msElapsed += 100;
+      System.out.println("bottom of cycle");
     }
   }
 
@@ -72,8 +77,8 @@ public class Game {
       for(int c = 0; c< grid.getNumCols(); i++){
 
 
-  }
-}
+      }
+    }
   }
 
   public void scrollLeft() {
