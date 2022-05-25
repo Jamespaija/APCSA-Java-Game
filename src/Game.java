@@ -14,7 +14,7 @@ public class Game {
   /*private final String fileCursorLocked = "images/cursors/locked.png",
 			fileCursorUnlocked = "images/cursors/unlocked.png",
 			fileCursorDefault = "images/cursors/default.png";*/
-  public int [][]lastLoc =  int [][];
+  //public int [][]lastLoc =  int [][]; //not valid syntax, what is this for?
 
   public Game() {
 
@@ -90,16 +90,11 @@ public void handleMousePressed() {
       for(int c = 0; c< grid.getNumCols(); i++){
 
 
-<<<<<<< HEAD
       }
     }
-=======
 
       //field for target and use the field location to compare it to handleMousePressed. 
 
-  }
-}
->>>>>>> 3330325be155df92456b224a22be68bd99e5ad2c
   }
 
   public void scrollLeft() {
