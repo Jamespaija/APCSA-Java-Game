@@ -15,6 +15,7 @@ import javax.swing.*;
 
 public class Grid extends JComponent implements KeyListener, MouseListener
 {
+	public static final double[] Cell = null;
 	private Cell[][] cells;
 	private JFrame frame;
 	private int lastKeyPressed;

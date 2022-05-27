@@ -15,14 +15,14 @@ public class Game {
   private int timesGet;
   private int timesAvoid;
   private String targetPic = "images/target.png";
+  public int score = 0;
+
   /*
    * private final String fileCursorLocked = "images/cursors/locked.png",
    * fileCursorUnlocked = "images/cursors/unlocked.png",
    * fileCursorDefault = "images/cursors/default.png";
    */
   // public int [][]lastLoc = int [][]; //not valid syntax, what is this for?
-  // public int expireTime = Grid.pause(milliseconds: 3);
-  public int score = 0;
 
   public Game() {
 
@@ -103,25 +103,27 @@ public class Game {
   // populate target
   public void spawn() {
     // spawns random target on the grid
-    for(int r = 0; r < grid.getNumRows(); r++){
-      for(int c = 0; c< grid.getNumCols(); c++){
-        //Object tagetPic;
-        [r][c] = tagetPic;
 
-      }
+    int r = (int) Math.random() * (15) - 1;
+    int c = (int) (Math.random() * (15) - 1);
+
+    // Object targetPic;
+    grid.setImage(new Location(r, c), "image/target.png");
+    if (mselapsed == 3000)
+      ;
+    {
+
     }
 
-      //field for target and use the field location to compare it to handleMousePressed. 
+    // field for target and use the field location to compare it to
+    // handleMousePressed.
 
   }
 
-  public void scrollLeft() {
-
-  }
-
-  public void handleCollision(Location loc) {
-
-  }
+  /*
+   * public void scrollLeft(){}
+   * public void handleCollision(Location loc){}
+   */
 
   public int getScore() {
     score++;
@@ -138,8 +140,9 @@ public class Game {
     return false;
   }
 
-  // public boolean accuracy() {
-
-  // average from target divided by the shots made.
-
+  public double accuracy() {
+    double aim = getScore() / 30;
+    // average from target divided by the shots made.
+    return aim;
+  }
 }
