@@ -64,9 +64,13 @@ public class Grid extends JComponent implements KeyListener, MouseListener
 	}
 
 	public boolean isValid(final Location loc) {
-		final int row = loc.getRow();
-		final int col = loc.getCol();
-		return 0 <= row && row < getNumRows() && 0 <= col && col < getNumCols();
+		if(loc!=null){
+			final int row = loc.getRow();
+			final int col = loc.getCol();
+			return 0 <= row && row < getNumRows() && 0 <= col && col < getNumCols();
+		} else {
+			return false;
+		}
 	}
 
 		// returns -1 if no key pressed since last call.

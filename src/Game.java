@@ -4,8 +4,7 @@
  * Author: James Paija Pun
  */
 import java.util.Random;
-
-import javax.naming.TimeLimitExceededException;
+//import javax.naming.TimeLimitExceededException;
 
 public class Game {
 
@@ -61,13 +60,14 @@ public class Game {
     // check last key pressed
     Location loc = grid.checkLastLocationClicked();
     System.out.println(loc);
-
-    String currentPic = grid.getImage(loc);
-    if (targetPic.equals(currentPic)) {
-      // else if(!targetPic.equals(currentPic)&& grid. ){
-      getScore();
+    if(loc != null){
+      String currentPic = grid.getImage(loc);
+      if (targetPic.equals(currentPic)) {
+        // else if(!targetPic.equals(currentPic)&& grid. ){
+        getScore();
+      }  
     }
-
+    
     // if (loc) {
 
   }
@@ -104,15 +104,12 @@ public class Game {
   public void spawn() {
     // spawns random target on the grid
 
-    int r = (int) Math.random() * (15) - 1;
-    int c = (int) (Math.random() * (15) - 1);
+    int r = (int) Math.random() * (15);
+    int c = (int) (Math.random() * (15));
 
-    // Object targetPic;
-    grid.setImage(new Location(r, c), "image/target.png");
-    if (mselapsed == 3000)
-      ;
+    if (msElapsed == 3000)
     {
-
+      grid.setImage(new Location(r, c), "images/target.png");
     }
 
     // field for target and use the field location to compare it to
