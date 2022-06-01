@@ -64,7 +64,7 @@ public class Game {
       String currentPic = grid.getImage(loc);
       if (targetPic.equals(currentPic)) {
         // else if(!targetPic.equals(currentPic)&& grid. ){
-        getScore();
+        //getScore();
       }  
     }
     
@@ -104,12 +104,12 @@ public class Game {
   public void spawn() {
     // spawns random target on the grid
 
-    int r = (int) Math.random() * (15);
-    int c = (int) (Math.random() * (15));
+    int r = (int) Math.random() * (15)-1;
+    int c = (int) Math.random() * (15)-1;
 
-    if (msElapsed == 3000)
+    if (msElapsed == 5000)
     {
-      grid.setImage(new Location(r, c), "images/target.png");
+      grid.setImage(new Location(r, c), targetPic);
     }
 
     // field for target and use the field location to compare it to
