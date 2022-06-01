@@ -48,7 +48,7 @@ public class Game {
         spawn();
       }
       // System.out.println("finished if");
-      updateTitle();
+      // updateTitle();
       // System.out.println("updated title");
       msElapsed += 100;
       // System.out.println("bottom of cycle");
@@ -60,14 +60,22 @@ public class Game {
     // check last key pressed
     Location loc = grid.checkLastLocationClicked();
     System.out.println(loc);
-    if(loc != null){
-      String currentPic = grid.getImage(loc);
-      if (targetPic.equals(currentPic)) {
-        // else if(!targetPic.equals(currentPic)&& grid. ){
-        //getScore();
-      }  
+
+    if (loc == null) {
+      return;
     }
-    
+
+    String currentPic = grid.getImage(loc);
+
+    if (targetPic.equals(currentPic)) {
+      System.out.println("hit target");
+      getScore();
+      spawn();
+    }
+    // else if(targetPic.equals(currentPic)&& grid. ){
+    // getScore();
+    // }
+
     // if (loc) {
 
   }
@@ -104,15 +112,13 @@ public class Game {
   public void spawn() {
     // spawns random target on the grid
 
-    int r = (int) Math.random() * (15)-1;
-    int c = (int) Math.random() * (15)-1;
+    int r = (int) (Math.random() * 15 - 1);
+    int c = (int) (Math.random() * 15 - 1);
 
-    if (msElapsed == 5000)
-    {
+    if (msElapsed == 5000) {
       grid.setImage(new Location(r, c), targetPic);
     }
 
-    // field for target and use the field location to compare it to
     // handleMousePressed.
 
   }
