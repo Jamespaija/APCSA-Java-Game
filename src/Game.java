@@ -11,10 +11,10 @@ public class Game {
   private Grid grid;
   private int userRow;
   private int msElapsed;
-  private int timesGet;
-  private int timesAvoid;
   private String targetPic = "images/target.png";
   public int score = 0;
+  private Location targetLoc;
+  private int start;
 
   /*
    * private final String fileCursorLocked = "images/cursors/locked.png",
@@ -28,8 +28,6 @@ public class Game {
     grid = new Grid(15, 15);
     userRow = 1;
     msElapsed = 0;
-    timesGet = 0;
-    timesAvoid = 0;
     updateTitle();
     grid.setBackground("images/map.jpg");
     grid.setImage(new Location(userRow, 0), targetPic);
@@ -41,22 +39,21 @@ public class Game {
       Grid.pause(100);
 
       handleMousePressed();
-
+      spawn();
       // System.out.println("finished hkp");
-      if (msElapsed % 300 == 0) {
+      if (start >= 5000)
         // System.out.println("about to spawn");
         spawn();
-      }
-      // System.out.println("finished if");
-      // updateTitle();
-      // System.out.println("updated title");
-      msElapsed += 100;
-      // System.out.println("bottom of cycle");
     }
+    // System.out.println("finished if");
+    // updateTitle();
+    // System.out.println("updated title");
+    msElapsed += 100;
+    // System.out.println("bottom of cycle");
   }
 
   public void handleMousePressed() {
-
+    WavPlayer.play("/sound/" + val);
     // check last key pressed
     Location loc = grid.checkLastLocationClicked();
     System.out.println(loc);
@@ -70,7 +67,6 @@ public class Game {
     if (targetPic.equals(currentPic)) {
       System.out.println("hit target");
       getScore();
-      spawn();
     }
     // else if(targetPic.equals(currentPic)&& grid. ){
     // getScore();
@@ -110,23 +106,19 @@ public class Game {
 
   // populate target
   public void spawn() {
+
+    grid.setImage(targetLoc, null);
+
     // spawns random target on the grid
 
     int r = (int) (Math.random() * 15 - 1);
     int c = (int) (Math.random() * 15 - 1);
+    targetLoc = new Location(r, c);
 
-    if (msElapsed == 5000) {
-      grid.setImage(new Location(r, c), targetPic);
-    }
-
-    // handleMousePressed.
+    grid.setImage(targetLoc, targetPic);
+    start = 0;
 
   }
-
-  /*
-   * public void scrollLeft(){}
-   * public void handleCollision(Location loc){}
-   */
 
   public int getScore() {
     score++;
