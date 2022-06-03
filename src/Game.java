@@ -30,7 +30,9 @@ public class Game {
     msElapsed = 0;
     updateTitle();
     grid.setBackground("images/map.jpg");
-    grid.setImage(new Location(userRow, 0), targetPic);
+    
+    targetLoc = new Location(0,0);
+    spawn();
   }
 
   public void play() {
@@ -39,34 +41,39 @@ public class Game {
       Grid.pause(100);
 
       handleMousePressed();
-      spawn();
-      // System.out.println("finished hkp");
-      if (start >= 5000)
+
+      //System.out.println(msElapsed - start);
+      if (msElapsed - start >= 5000){
         // System.out.println("about to spawn");
         spawn();
-    }
+      }
+    
     // System.out.println("finished if");
     // updateTitle();
     // System.out.println("updated title");
     msElapsed += 100;
     // System.out.println("bottom of cycle");
   }
+}
 
   public void handleMousePressed() {
-    WavPlayer.play("/sound/" + val);
+    //WavPlayer.play("/sound/" + val);
     // check last key pressed
     Location loc = grid.checkLastLocationClicked();
-    System.out.println(loc);
+    
 
     if (loc == null) {
       return;
     }
+
+    System.out.println(loc);
 
     String currentPic = grid.getImage(loc);
 
     if (targetPic.equals(currentPic)) {
       System.out.println("hit target");
       getScore();
+      spawn();
     }
     // else if(targetPic.equals(currentPic)&& grid. ){
     // getScore();
@@ -107,7 +114,8 @@ public class Game {
   // populate target
   public void spawn() {
 
-    grid.setImage(targetLoc, null);
+
+    grid.setImage(targetLoc, "");
 
     // spawns random target on the grid
 
@@ -116,7 +124,7 @@ public class Game {
     targetLoc = new Location(r, c);
 
     grid.setImage(targetLoc, targetPic);
-    start = 0;
+    start = msElapsed;
 
   }
 
