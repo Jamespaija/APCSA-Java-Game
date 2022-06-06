@@ -15,52 +15,47 @@ public class Game {
   public int score = 0;
   private Location targetLoc;
   private int start;
+  private int timer;
+  
 
-  /*
-   * private final String fileCursorLocked = "images/cursors/locked.png",
-   * fileCursorUnlocked = "images/cursors/unlocked.png",
-   * fileCursorDefault = "images/cursors/default.png";
-   */
-  // public int [][]lastLoc = int [][]; //not valid syntax, what is this for?
+
 
   public Game() {
-
-    grid = new Grid(15, 15);
+    timer = 10;
+    grid = new Grid(25, 25);
     userRow = 1;
     msElapsed = 0;
     updateTitle();
     grid.setBackground("images/map.jpg");
-    
-    targetLoc = new Location(0,0);
+
+    targetLoc = new Location(0, 0);
     spawn();
   }
 
   public void play() {
-
+    grid.showMessageDialog("Try to hit the target for 2 minutes. ");
     while (!isGameOver()) {
       Grid.pause(100);
-
       handleMousePressed();
+      updateTitle();
 
-      //System.out.println(msElapsed - start);
-      if (msElapsed - start >= 5000){
-        // System.out.println("about to spawn");
+      if (msElapsed - start >= 5000) {
         spawn();
       }
-    
-    // System.out.println("finished if");
-    // updateTitle();
-    // System.out.println("updated title");
-    msElapsed += 100;
-    // System.out.println("bottom of cycle");
-  }
+      
+      msElapsed += 100;
+      if(msElapsed % 1000 == 0)
+        timer -= 1;
 }
+      if(timer == 0){
+        isGameOver();
+    }
+  }
 
   public void handleMousePressed() {
-    //WavPlayer.play("/sound/" + val);
+    WavPlayer.play("sound/val.wav");
     // check last key pressed
     Location loc = grid.checkLastLocationClicked();
-    
 
     if (loc == null) {
       return;
@@ -72,55 +67,20 @@ public class Game {
 
     if (targetPic.equals(currentPic)) {
       System.out.println("hit target");
-      getScore();
+      score++;
       spawn();
     }
-    // else if(targetPic.equals(currentPic)&& grid. ){
-    // getScore();
-    // }
-
-    // if (loc) {
-
+    
   }
 
-  /*
-   * public void handleKeyPress() {
-   * 
-   * // check last key pressed
-   * int key = grid.checkLastKeyPressed();
-   * System.out.println(key);
-   * 
-   * // set "w" key to move the plane up
-   * if (key == 87) {
-   * // check case where out of bounds
-   * 
-   * // change the field for userrow
-   * 
-   * userRow--;
-   * 
-   * // shift the user picture up in the array
-   * Location loc = new Location(userRow, 0);
-   * grid.setImage(loc, "user.gif");
-   * 
-   * Location oldLoc = new Location(userRow + 1, 0);
-   * grid.setImage(oldLoc, null);
-   * 
-   * }
-   * // if I push down arrow, then plane goes down
-   * 
-   * }
-   */
-
-  // populate target
   public void spawn() {
-
 
     grid.setImage(targetLoc, "");
 
     // spawns random target on the grid
 
-    int r = (int) (Math.random() * 15 - 1);
-    int c = (int) (Math.random() * 15 - 1);
+    int r = (int) (Math.random() * 25 - 1);
+    int c = (int) (Math.random() * 25 - 1);
     targetLoc = new Location(r, c);
 
     grid.setImage(targetLoc, targetPic);
@@ -129,17 +89,19 @@ public class Game {
   }
 
   public int getScore() {
-    score++;
-    // score updates if you hit the target
     return score;
   }
+  public void updateScore(){
+    score++;
+} 
 
   public void updateTitle() {
-    grid.setTitle("Your Score :  " + getScore());
+    grid.setTitle("Your Score:" + getScore() + " timer:" + timer) ;
 
   }
 
   public boolean isGameOver() {
+   // grid.showInputDialog("Try Again");
     return false;
   }
 
