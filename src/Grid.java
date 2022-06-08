@@ -29,6 +29,7 @@ public class Grid extends JComponent implements KeyListener, MouseListener
 	private int yOffset;
 	private double xScale;
 	private double yScale;
+    public Object showMessageDialog;
 	
 
 	public Grid(final int numRows, final int numCols) {

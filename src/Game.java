@@ -4,7 +4,12 @@
  * Author: James Paija Pun
  */
 import java.util.Random;
+import java.text.NumberFormat;
+import java.util.Formatter;
+
 //import javax.naming.TimeLimitExceededException;
+
+import javax.naming.spi.DirStateFactory.Result;
 
 public class Game {
 
@@ -16,10 +21,12 @@ public class Game {
   private Location targetLoc;
   private int start;
   private int timer;
-  private double accuracy;
+  private int accuracy;
+  private int counter = 0;
+  private double result = 0.0;
 
   public Game() {
-    timer = 10;
+    timer = 60;
     grid = new Grid(25, 25);
     userRow = 1;
     msElapsed = 0;
@@ -31,13 +38,14 @@ public class Game {
   }
 
   public void play() {
-    grid.showMessageDialog("Try to hit the target for 2 minutes. ");
+    grid.fullscreen();
+    grid.showMessageDialog("Try to hit the target for 1 minute. ");
     while (timer != -1) {
       Grid.pause(100);
       handleMousePressed();
       updateTitle();
 
-      if (msElapsed - start >= 5000) {
+      if (msElapsed - start >= 15000) {
         spawn();
       }
 
@@ -45,9 +53,8 @@ public class Game {
       if (msElapsed % 1000 == 0)
         timer -= 1;
     }
-    if (timer == 0) {
-
-    }
+    grid.setBackground("images/wallpaper.jpg");
+    grid.showMessageDialog("You got " + score + " out of " + result() + " targets." + "\n You have accuracy of " + accuracy()+"%");
 
   }
 
@@ -82,7 +89,7 @@ public class Game {
     int r = (int) (Math.random() * 25 - 1);
     int c = (int) (Math.random() * 25 - 1);
     targetLoc = new Location(r, c);
-
+    counter++;
     grid.setImage(targetLoc, targetPic);
     start = msElapsed;
 
@@ -97,17 +104,23 @@ public class Game {
   }
 
   public void updateTitle() {
-    grid.setTitle("Your Score:" + getScore() + " \tTimer:" + timer);
+    grid.setTitle("Your Score:" + getScore() + " \tTimer:" + timer + " second");
 
   }
 
   public boolean isGameOver() {
-    // grid.showInputDialog("Try Again");
     return false;
   }
 
-  public double result() {
-    // accuracy = (1.0)(score-)
-    return accuracy;
+  public int result() {
+    return counter;
   }
+
+  public String accuracy() {
+    result = (getScore() * 100.0 / result());
+    NumberFormat nf = NumberFormat.getInstance();
+    nf.setMaximumFractionDigits(2);
+    return nf.format(result);
+  }
+
 }
