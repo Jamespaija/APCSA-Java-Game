@@ -16,9 +16,7 @@ public class Game {
   private Location targetLoc;
   private int start;
   private int timer;
-  
-
-
+  private double accuracy;
 
   public Game() {
     timer = 10;
@@ -34,7 +32,7 @@ public class Game {
 
   public void play() {
     grid.showMessageDialog("Try to hit the target for 2 minutes. ");
-    while (!isGameOver()) {
+    while (timer != -1) {
       Grid.pause(100);
       handleMousePressed();
       updateTitle();
@@ -42,18 +40,19 @@ public class Game {
       if (msElapsed - start >= 5000) {
         spawn();
       }
-      
+
       msElapsed += 100;
-      if(msElapsed % 1000 == 0)
+      if (msElapsed % 1000 == 0)
         timer -= 1;
-}
-      if(timer == 0){
-        isGameOver();
     }
+    if (timer == 0) {
+
+    }
+
   }
 
   public void handleMousePressed() {
-    WavPlayer.play("sound/val.wav");
+
     // check last key pressed
     Location loc = grid.checkLastLocationClicked();
 
@@ -63,6 +62,7 @@ public class Game {
 
     System.out.println(loc);
 
+    WavPlayer.play("sounds/val.wav");
     String currentPic = grid.getImage(loc);
 
     if (targetPic.equals(currentPic)) {
@@ -70,7 +70,7 @@ public class Game {
       score++;
       spawn();
     }
-    
+
   }
 
   public void spawn() {
@@ -91,23 +91,23 @@ public class Game {
   public int getScore() {
     return score;
   }
-  public void updateScore(){
+
+  public void updateScore() {
     score++;
-} 
+  }
 
   public void updateTitle() {
-    grid.setTitle("Your Score:" + getScore() + " timer:" + timer) ;
+    grid.setTitle("Your Score:" + getScore() + " \tTimer:" + timer);
 
   }
 
   public boolean isGameOver() {
-   // grid.showInputDialog("Try Again");
+    // grid.showInputDialog("Try Again");
     return false;
   }
 
-  public double accuracy() {
-    double aim = getScore() / 30;
-    // average from target divided by the shots made.
-    return aim;
+  public double result() {
+    // accuracy = (1.0)(score-)
+    return accuracy;
   }
 }
