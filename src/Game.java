@@ -27,7 +27,7 @@ public class Game {
 
   public Game() {
     timer = 60;
-    grid = new Grid(25, 25);
+    grid = new Grid(40,60);
     userRow = 1;
     msElapsed = 0;
     updateTitle();
@@ -92,6 +92,7 @@ public class Game {
     counter++;
     grid.setImage(targetLoc, targetPic);
     start = msElapsed;
+    System.out.println(targetLoc);
 
   }
 

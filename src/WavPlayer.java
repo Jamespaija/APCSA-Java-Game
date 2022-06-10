@@ -41,7 +41,7 @@ public class WavPlayer {
 			//w = "apcsa/" + w;
 			//URL url = new File(w).toURI().toURL();
 			
-			System.out.println("Trying to play: " + w);
+			System.out.println("Trying to play sound " + w);
 			URL url = loadSoundUrl(w);
 
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
